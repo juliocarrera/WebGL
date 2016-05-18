@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>WebGL cube demo</title>
+<style>
+  body { margin : 0; padding : 0; overflow : hidden; }
+  canvas { width : 100%; height : 100% }
+</style>
+</head>
+
+<body>
+
+<script src="http://threejs.org/build/three.js"> </script>
+
+<script>
+  // actual demo script code
+
+  // define the camera's view frustum
+  var field_of_view_angle = 75;
+  var aspect = window.innerWidth / window.innerHeight;
+  var near_clip_plane = 0.1;
+  var far_clip_plane = 1000;
+  var camera = new THREE.PerspectiveCamera( field_of_view_angle, aspect, near_clip_plane, far_clip_plane );
+
+  // define the lights
+  var dirLight = new THREE.DirectionalLight( 0xffffff, 0.125 );
+  dirLight.position.set( 0, 0, 1).normalize();
+  var pointLight = new THREE.PointLight( 0xffffff, 1.5 );
+  pointLight.position.set( 0, 100, 90 );
+  pointLight.color.setHex( 0xffff00 );
+
+  // define the scene and add the lights
+  var scene = new THREE.Scene();
+  scene.add( dirLight );
+  scene.add( pointLight );
+  scene.fog = new THREE.Fog( 0x000000, 250, 1400 );
+
+  // define the renderer -- manages the objects beind displayed
+  renderer = new THREE.WebGLRenderer();
+  renderer.setSize( window.innerWidth, window.innerHeight );
+  renderer.setClearColor( scene.fog.color );
+  renderer.setPixelRatio( window.devicePixelRatio );
+  document.body.appendChild( renderer.domElement );
+
+  // define the objects to be displayed
+
+  // a torus that will rotate slowly
+  var torus_geometry = new THREE.TorusGeometry( 20, 5, 16, 64);
+  var material = new THREE.MeshPhongMaterial( { color: 0x00ff00, shading : THREE.SmoothShading } );
+//  var material = new THREE.MeshLambertMaterial();
+  var torus = new THREE.Mesh( torus_geometry, material );
+
+  // a parallelipiped that looks like the torus' handle
+  var box_geometry = new THREE.BoxGeometry( 1, 1, 1 );
+  var box = new THREE.Mesh( box_geometry, material );
+
+  // scale the unit cube in the Y dimension
+  box.scale.set( 2, 25, 2 );
+
+  // a sphere that rotates around a point on the torus' major radius
+  var sphere_geometry = new THREE.SphereGeometry( 1, 24, 24 );
+  var sphere = new THREE.Mesh( sphere_geometry, material );
+
+  // a pivot point on the torus' major radius to serve as the sphere's center of rotation
+  var pivot_point = new THREE.Object3D();
+  pivot_point.position.copy( new THREE.Vector3( 20, 0, 0 ) );
+  pivot_point.add( sphere );
+
+  // position the handle and the rotating sphere wrt the torus
+  torus.add( box );
+  torus.add( pivot_point );
+
+  // define the groups of objects to be rendered
+  var group = new THREE.Group();
+  scene.add( group );
+
+  // add the torus to the group
+  group.add( torus );
+
+  // other group functionality
+  // box.visible = false;
+  // group.remove( box );
+  // a_scene = group.parent;
+  // a_group = group.children;
+
+  // move the camera back so we can see all the objects
+  camera.position.z = 100;
+
+  // enable the orbit control functions
+  //  controls = new THREE.OrbitControls( camera );
+  // controls.enablePan = false;
+  // controls.enableZoom = false;
+  // controls.enableRotate = false;
+  // controls.minDistance
+  // controls.maxDistance
+  // controls.minPolarAngle
+  // controls.maxPolarAngle
+
+  // define the animation function
+
+  var X_AXIS = new THREE.Vector3( 1, 0, 0 );
+  var Y_AXIS = new THREE.Vector3( 0, 1, 0 );
+  var Z_AXIS = new THREE.Vector3( 0, 0, 1 );
+
+  // move the sphere st it doesn't spin around its own axis
+  var position = new THREE.Matrix4();
+  position.setPosition( new THREE.Vector3( 10, 0, 0 ) );
+  sphere.applyMatrix( position );
+
+  // define the incremental sphere rotation angle
+  var rotation_angle = Math.PI * 0.125;
+
+  var render = function()
+  {
+  requestAnimationFrame( render );
+
+  // rotate the sphere around the Y axis
+  var rotation = new THREE.Matrix4();
+  rotation.makeRotationAxis( Y_AXIS, rotation_angle );
+  sphere.applyMatrix( rotation );
+
+  // rotate the torus slowly around the Y axis and slower still around the X axis
+  torus.rotation.x += 0.001;
+  torus.rotation.y += 0.01; 
+// Math.random();  // Math.cos( time );  // THREE.Math.degToRad( 45 );  // Math.PI * .25;  // 0.01;
+
+  // controls.update();
+
+  renderer.render( scene, camera );
+  };
+
+  // run the animation 
+  render();
+
+</script>
+
+</body>
+</html>
