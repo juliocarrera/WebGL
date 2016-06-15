@@ -1,0 +1,360 @@
+[
+    {
+        "event_id": "8045148", 
+        "open_slots": [
+            {
+                "need": "Kitchen", 
+                "start_time": "2016-06-14 13:00PM GMT", 
+                "end_time": "2016-06-14 13:30PM GMT", 
+                "unfilled_slots": 2
+            }, 
+            {
+                "need": "Kitchen", 
+                "start_time": "2016-06-14 14:00PM GMT", 
+                "end_time": "2016-06-14 14:30PM GMT", 
+                "unfilled_slots": 2
+            }, 
+            {
+                "need": "Kitchen", 
+                "start_time": "2016-06-15 12:30PM GMT", 
+                "end_time": "2016-06-15 13:00PM GMT", 
+                "unfilled_slots": 1
+            }, 
+            {
+                "need": "Kitchen", 
+                "start_time": "2016-06-15 13:00PM GMT", 
+                "end_time": "2016-06-15 13:30PM GMT", 
+                "unfilled_slots": 1
+            }, 
+            {
+                "need": "Kitchen", 
+                "start_time": "2016-06-15 13:30PM GMT", 
+                "end_time": "2016-06-15 14:00PM GMT", 
+                "unfilled_slots": 2
+            }, 
+            {
+                "need": "Kitchen", 
+                "start_time": "2016-06-15 14:00PM GMT", 
+                "end_time": "2016-06-15 14:30PM GMT", 
+                "unfilled_slots": 1
+            }, 
+            {
+                "need": "Bar", 
+                "start_time": "2016-06-14 12:30PM GMT", 
+                "end_time": "2016-06-14 13:00PM GMT", 
+                "unfilled_slots": 1
+            }, 
+            {
+                "need": "Bar", 
+                "start_time": "2016-06-14 13:00PM GMT", 
+                "end_time": "2016-06-14 13:30PM GMT", 
+                "unfilled_slots": 1
+            }, 
+            {
+                "need": "Bar", 
+                "start_time": "2016-06-14 13:30PM GMT", 
+                "end_time": "2016-06-14 14:00PM GMT", 
+                "unfilled_slots": 2
+            }, 
+            {
+                "need": "Bar", 
+                "start_time": "2016-06-14 14:00PM GMT", 
+                "end_time": "2016-06-14 14:30PM GMT", 
+                "unfilled_slots": 1
+            }, 
+            {
+                "need": "Bar", 
+                "start_time": "2016-06-15 12:30PM GMT", 
+                "end_time": "2016-06-15 13:00PM GMT", 
+                "unfilled_slots": 2
+            }, 
+            {
+                "need": "Bar", 
+                "start_time": "2016-06-15 13:00PM GMT", 
+                "end_time": "2016-06-15 13:30PM GMT", 
+                "unfilled_slots": 2
+            }, 
+            {
+                "need": "Bar", 
+                "start_time": "2016-06-15 13:30PM GMT", 
+                "end_time": "2016-06-15 14:00PM GMT", 
+                "unfilled_slots": 1
+            }, 
+            {
+                "need": "Bar", 
+                "start_time": "2016-06-15 14:00PM GMT", 
+                "end_time": "2016-06-15 14:30PM GMT", 
+                "unfilled_slots": 2
+            }
+        ], 
+        "event_name": "API Testing", 
+        "number_open": 21, 
+        "signed_members": [
+            {
+                "first_name": "Broomstones", 
+                "last_name": "Volunteer", 
+                "start_time": "2016-06-14 12:30PM GMT", 
+                "end_time": "2016-06-14 13:00PM GMT", 
+                "need": "Kitchen", 
+                "email": "volunteer@broomstones.org"
+            }, 
+            {
+                "first_name": "julio", 
+                "last_name": "carrera", 
+                "start_time": "2016-06-14 12:30PM GMT", 
+                "end_time": "2016-06-14 13:00PM GMT", 
+                "need": "Kitchen", 
+                "email": "carrera_julio@hotmail.com"
+            }, 
+            {
+                "first_name": "Broomstones", 
+                "last_name": "Volunteer", 
+                "start_time": "2016-06-14 13:30PM GMT", 
+                "end_time": "2016-06-14 14:00PM GMT", 
+                "need": "Kitchen", 
+                "email": "volunteer@broomstones.org"
+            }, 
+            {
+                "first_name": "Meeghan", 
+                "last_name": "Nolasco", 
+                "start_time": "2016-06-14 13:30PM GMT", 
+                "end_time": "2016-06-14 14:00PM GMT", 
+                "need": "Kitchen", 
+                "email": "meeghan.nolasco@gmail.com"
+            }, 
+            {
+                "first_name": "Meeghan", 
+                "last_name": "Nolasco", 
+                "start_time": "2016-06-15 12:30PM GMT", 
+                "end_time": "2016-06-15 13:00PM GMT", 
+                "need": "Kitchen", 
+                "email": "meeghan.nolasco@gmail.com"
+            }, 
+            {
+                "first_name": "Broomstones", 
+                "last_name": "Volunteer", 
+                "start_time": "2016-06-15 13:00PM GMT", 
+                "end_time": "2016-06-15 13:30PM GMT", 
+                "need": "Kitchen", 
+                "email": "volunteer@broomstones.org"
+            }, 
+            {
+                "first_name": "Meeghan", 
+                "last_name": "Nolasco", 
+                "start_time": "2016-06-15 14:00PM GMT", 
+                "end_time": "2016-06-15 14:30PM GMT", 
+                "need": "Kitchen", 
+                "email": "meeghan.nolasco@gmail.com"
+            }, 
+            {
+                "first_name": "Meeghan", 
+                "last_name": "Nolasco", 
+                "start_time": "2016-06-14 12:30PM GMT", 
+                "end_time": "2016-06-14 13:00PM GMT", 
+                "need": "Bar", 
+                "email": "meeghan.nolasco@gmail.com"
+            }, 
+            {
+                "first_name": "Broomstones", 
+                "last_name": "Volunteer", 
+                "start_time": "2016-06-14 13:00PM GMT", 
+                "end_time": "2016-06-14 13:30PM GMT", 
+                "need": "Bar", 
+                "email": "volunteer@broomstones.org"
+            }, 
+            {
+                "first_name": "Broomstones", 
+                "last_name": "Volunteer", 
+                "start_time": "2016-06-14 14:00PM GMT", 
+                "end_time": "2016-06-14 14:30PM GMT", 
+                "need": "Bar", 
+                "email": "volunteer@broomstones.org"
+            }, 
+            {
+                "first_name": "Broomstones", 
+                "last_name": "Volunteer", 
+                "start_time": "2016-06-15 13:30PM GMT", 
+                "end_time": "2016-06-15 14:00PM GMT", 
+                "need": "Bar", 
+                "email": "volunteer@broomstones.org"
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-14 13:00PM GMT", 
+                "end_time": "2016-06-14 13:30PM GMT", 
+                "need": "Kitchen", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-14 13:00PM GMT", 
+                "end_time": "2016-06-14 13:30PM GMT", 
+                "need": "Kitchen", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-14 14:00PM GMT", 
+                "end_time": "2016-06-14 14:30PM GMT", 
+                "need": "Kitchen", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-14 14:00PM GMT", 
+                "end_time": "2016-06-14 14:30PM GMT", 
+                "need": "Kitchen", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-15 12:30PM GMT", 
+                "end_time": "2016-06-15 13:00PM GMT", 
+                "need": "Kitchen", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-15 13:00PM GMT", 
+                "end_time": "2016-06-15 13:30PM GMT", 
+                "need": "Kitchen", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-15 13:30PM GMT", 
+                "end_time": "2016-06-15 14:00PM GMT", 
+                "need": "Kitchen", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-15 13:30PM GMT", 
+                "end_time": "2016-06-15 14:00PM GMT", 
+                "need": "Kitchen", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-15 14:00PM GMT", 
+                "end_time": "2016-06-15 14:30PM GMT", 
+                "need": "Kitchen", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-14 12:30PM GMT", 
+                "end_time": "2016-06-14 13:00PM GMT", 
+                "need": "Bar", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-14 13:00PM GMT", 
+                "end_time": "2016-06-14 13:30PM GMT", 
+                "need": "Bar", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-14 13:30PM GMT", 
+                "end_time": "2016-06-14 14:00PM GMT", 
+                "need": "Bar", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-14 13:30PM GMT", 
+                "end_time": "2016-06-14 14:00PM GMT", 
+                "need": "Bar", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-14 14:00PM GMT", 
+                "end_time": "2016-06-14 14:30PM GMT", 
+                "need": "Bar", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-15 12:30PM GMT", 
+                "end_time": "2016-06-15 13:00PM GMT", 
+                "need": "Bar", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-15 12:30PM GMT", 
+                "end_time": "2016-06-15 13:00PM GMT", 
+                "need": "Bar", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-15 13:00PM GMT", 
+                "end_time": "2016-06-15 13:30PM GMT", 
+                "need": "Bar", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-15 13:00PM GMT", 
+                "end_time": "2016-06-15 13:30PM GMT", 
+                "need": "Bar", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-15 13:30PM GMT", 
+                "end_time": "2016-06-15 14:00PM GMT", 
+                "need": "Bar", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-15 14:00PM GMT", 
+                "end_time": "2016-06-15 14:30PM GMT", 
+                "need": "Bar", 
+                "email": ""
+            }, 
+            {
+                "first_name": "", 
+                "last_name": "", 
+                "start_time": "2016-06-15 14:00PM GMT", 
+                "end_time": "2016-06-15 14:30PM GMT", 
+                "need": "Bar", 
+                "email": ""
+            }
+        ], 
+        "number_filled": 32
+    }, 
+    {
+        "event_id": "7707531", 
+        "open_slots": [], 
+        "event_name": "Broomstones Octoberfest Open Spiel - Team Sign Up", 
+        "number_open": 0, 
+        "signed_members": [], 
+        "number_filled": null
+    }
+]
