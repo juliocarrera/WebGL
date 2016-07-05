@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import sys
 import re
 import urllib
@@ -5,23 +6,35 @@ import urllib2
 import json
 
 
+
 # Signupgenius url
-URL = 'https://api.signupgenius.com/v2/k/'
+SIGNUPGENIUS_URL = 'https://api.signupgenius.com/v2/k/'
 
 # sign ups created active
 CREATED_ACTIVE = 'signups/created/active/?'
 GROUP_MEMBERS = 'groups/groupid/members/?'
-SIGNUP_REPORT = 'signups/report/signupid/?'
+SIGNUP_REPORT = 'signups/report/filled/signupid/?'
 SIGNUP_AVAILABLE = 'signups/available/signupid/?'
 
 # signupgenius API key
-API_KEY = 'SIGNUPGENIUS_API_KEY_GOES_HERE'
+API_KEY = 'N1B5T29Bd0lSRWpLSXREbWY3WjJmQT09'
+
+# test event ids for testing only 
+test_event_l = [ ( '8045148', 'API Testing' ), 
+                 ( '7707531', 'Broomstones Octoberfest Open Spiel - Team Sign Up' ) ]
+
+
+# for providing an API interface to get signup data
+BROOMSTONES_SERVER = 'julio'
+BROOMSTONES_SERVER_PATH = '/home/brooms6/www/{0}/broomstones3/'.format( BROOMSTONES_SERVER )
+SIGNUP_SUMMARY_PATH = '/home/brooms6/www/{0}/broomstones3/sug_events/'.format( BROOMSTONES_SERVER )
 
 
 # returns the json data for the given signupgenius endpoint request
-def get_signupgenius_request( endpoint_s, groupid_s = None, signupid_s = None ):
+def get_signupgenius_request( endpoint_s, groupid_s = None, eventid_s = None ):
     '''
-    returns a signupgenius request
+    returns the JSON data corresponding to the given signupgenius request
+    this function is called by all functions requesting event data via the SUG API endpoints
 
     signupgenius query example
     https://api.signupgenius.com/v2/k/user/profile/?user_key=ABX12ZYX447
@@ -36,20 +49,20 @@ def get_signupgenius_request( endpoint_s, groupid_s = None, signupid_s = None ):
 
     # build the request string
     if endpoint_s == SIGNUP_REPORT:
-        if signupid_s == None:
+        if eventid_s == None:
             print "Error - a signup id must be provided"
             return False
 
-        print "signup_id_s: " + signupid_s
-        request_s = endpoint_s.replace( 'signupid', signupid_s )
+        # print "signup_id_s: " + eventid_s
+        request_s = endpoint_s.replace( 'signupid', eventid_s )
 
     elif endpoint_s == SIGNUP_AVAILABLE:
-        if signupid_s == None:
+        if eventid_s == None:
             print "Error - a signup id must be provided"
             return False
 
-        print "signup_id_s: " + signupid_s
-        request_s = endpoint_s.replace( 'signupid', signupid_s )
+        # print "signup_id_s: " + eventid_s
+        request_s = endpoint_s.replace( 'signupid', eventid_s )
 
     elif endpoint_s == GROUP_MEMBERS:
         if groupid_s == None:
@@ -63,9 +76,9 @@ def get_signupgenius_request( endpoint_s, groupid_s = None, signupid_s = None ):
         request_s = endpoint_s
 
 
-    req = urllib2.Request( URL + request_s + q, None, headers )
-    print "signupgenius query: {0}".format( req.get_full_url() )
-    # search_results = urllib.urlopen( URL + endpoint_s )
+    req = urllib2.Request( SIGNUPGENIUS_URL + request_s + q, None, headers )
+    # print "signupgenius query: {0}".format( req.get_full_url() )
+    # search_results = urllib.urlopen( SIGNUPGENIUS_URL + endpoint_s )
 
     try:
         response = urllib2.urlopen( req )
@@ -81,12 +94,14 @@ def get_signupgenius_request( endpoint_s, groupid_s = None, signupid_s = None ):
     response.close()
 
     return data
+# end get_signupgenius_request
 
 
-def get_active_events( print_results=False ):
+def get_active_events():
     '''
-    returns list of active signups
+    returns the list of all active events
     '''
+    # return the test ids to avoid too many calls to the API
     results = []
 
     # get the response
@@ -109,20 +124,21 @@ def get_active_events( print_results=False ):
         return results
 
     for event in response[ 'data' ]:
-        print 'found event id: {0} title: {1}'.format( event[ 'id' ], event[ 'title' ] )
+        # print 'found event id: {0} title: {1}'.format( event[ 'id' ], event[ 'title' ] )
         results.append( ( str( event[ 'id' ] ), event[ 'title' ] ) )
 
     return results
+# end get_active_events
 
 
 def get_signed_up_members( event ):
     '''
-    returns list of members signed up for the given event
+    returns the list of members signed up for the given event
     '''
     signups = []
 
     # get the response
-    response = get_signupgenius_request( SIGNUP_REPORT, signupid_s = event[ 0 ] )
+    response = get_signupgenius_request( SIGNUP_REPORT, eventid_s = event[ 0 ] )
     if response == False:
         return ( None, signups )
     # print search_results.headers
@@ -149,7 +165,6 @@ def get_signed_up_members( event ):
 # end get_signed_up_members
 
 
-
 def get_open_slots( event ):
     '''
     returns the number of open slots for each need of the given event
@@ -157,7 +172,7 @@ def get_open_slots( event ):
     needs = []
 
     # get the response
-    response = get_signupgenius_request( SIGNUP_AVAILABLE, signupid_s = event[ 0 ] )
+    response = get_signupgenius_request( SIGNUP_AVAILABLE, eventid_s = event[ 0 ] )
     if response == False:
         return needs
     # print search_results.headers
@@ -189,9 +204,9 @@ def get_open_slots( event ):
 # end get_open_slots
 
 
-def get_group_members( group_s, print_results=False ):
+def get_group_members( group_s ):
     '''
-    returns list of active signups
+    returns the list of members of the given SUG group
     '''
     results = []
 
@@ -220,10 +235,15 @@ def get_group_members( group_s, print_results=False ):
         results.append( ( member[ 'id' ],  member[ 'firstname' ], member[ 'lastname' ] ) )
 
     return results
+# end get_group_members
 
 
+def write_json_file( event_data ):
+    '''
+    writes the JSON file corresponding to the given event data summary
+    '''
+    filename = SIGNUP_SUMMARY_PATH + event_data[ 'event_id' ]
 
-def write_signupgenius_events( event_reports, filename ):
     try:
         f = open( filename, 'w' )
     except IOError as (errno, strerror):
@@ -233,6 +253,22 @@ def write_signupgenius_events( event_reports, filename ):
         print( "Could not open output file: {0} - {1}".format( filename, err ) )
         raise
 
+    try:
+        json.dump( event_data, f, indent=4 )
+    except TypeError as err:
+        print "Failed to dump to JSON format: {0}".format( err )
+        f.close()
+        raise
+
+    f.write( "\n" )
+    f.close()
+# end write_json_file
+
+
+def write_signupgenius_events( event_reports ):
+    '''
+    writes a JSON event summary file for each event in the given list
+    '''
     report_l = []
     for event_data in event_reports:
         # package the signed up members
@@ -247,72 +283,85 @@ def write_signupgenius_events( event_reports, filename ):
             total_open = total_open + number_open
             slot_l.append( ( {'need':need, 'start_time':starttime, 'end_time':endtime, 'unfilled_slots':number_open} ) )
 
-        # append this event
-        report_l.append( ( {'event_id':event_data[ 0 ][ 0 ], 
-                            'event_name':event_data[ 0 ][ 1 ], 
-                            'number_filled':event_data[ 1 ], 
-                            'number_open':total_open,
-                            'signed_members':member_l,
-                            'open_slots':slot_l} ) )
+        # write the json file passing the dictionary
+        event_dict = {'event_id':event_data[ 0 ][ 0 ], 
+                      'event_name':event_data[ 0 ][ 1 ], 
+                      'number_filled':event_data[ 1 ], 
+                      'number_open':total_open,
+                      'signed_members':member_l,
+                      'open_slots':slot_l}
 
-    try:
-        json.dump( report_l, f, indent=4 )
-    except TypeError as err:
-        print "Failed to dump to JSON format: {0}".format( err )
-        f.close()
-        raise
+        write_json_file( event_dict )
 
-    f.write( "\n" )
-    f.close()
-
-    # also output results                                                                                                                           
-    print json.dumps( report_l, sort_keys = True, indent = 4, separators = (',', ': ') )
+        # append this event st we can dump the whole list to output
+        report_l.append( event_dict )
 
 
-# optional parameter is file to write to
-filename = "signupgenius_activity.json"
-if  len( sys.argv ) == 1:
-    print "SignUpGenius events will be written to file {0}".format( filename )
-    print "You can specify the output file name as the script argument. Example: python get_event_signups.py my_file_name.json"
-    print "\n"
-if len( sys.argv ) == 2:
-    filename = sys.argv[ 1 ]
+    # output the results                                                                                                                           
+    # print json.dumps( report_l, sort_keys = True, indent = 4, separators = (',', ': ') )
+# end write_signupgenius_events
 
+
+
+# start of script
 
 # get all active events
-events = get_active_events( False )
+events = get_active_events()
 if events == False:
     print "Get active signups failed\n"
     exit()
 
 # members = get_group_members( '4046175' )
 
-# for each event, report number signed up and available slots
+# for each active event, collect the data for the members who have signed up and for the still available slots
 event_reports = []
 for event in events:
     # get the members who have signed up for a slot of some event need
     ( number_filled, signed_members ) = get_signed_up_members( event )
 
-    # get the event needs with open slots
+    # get the still open slots
     event_needs = get_open_slots( event )
 
-    # add this event report
+    # add this event report to the list
     event_reports.append( ( event, number_filled, signed_members, event_needs ) )
 
 
 # display a completion message
-print "\n"
-print( "Found {0} SignUpGenius events:".format( len( events ) ) )
+print( "Found {0} SignUpGenius events".format( len( events ) ) )
 if len( events ) == 0:
     exit()
 
-# write the results out to a csv file
+# write the results out to an event summary file in JSON format, one per event
 try:
-    write_signupgenius_events( event_reports, filename )
+    write_signupgenius_events( event_reports )
 except ( IOError, OSError, TypeError ):
     # error message is displayed by write_active_leaked_keys()
     exit()
 
 # display a completion message
-print "\n"
-print( "Wrote SignUpGenius events to " + filename )
+print( "Wrote SignUpGenius events to " + SIGNUP_SUMMARY_PATH )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+get_active_signups.pyOpen
+Displaying get_active_signups.py.
