@@ -17,7 +17,7 @@ SIGNUP_REPORT = 'signups/report/filled/signupid/?'
 SIGNUP_AVAILABLE = 'signups/available/signupid/?'
 
 # signupgenius API key
-API_KEY = 'N1B5T29Bd0lSRWpLSXREbWY3WjJmQT09'
+API_KEY = 'SIGNUPGENIUS_API_KEY_GOES_HERE'
 
 # test event ids for testing only 
 test_event_l = [ ( '8045148', 'API Testing' ), 
